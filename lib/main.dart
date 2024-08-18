@@ -1,10 +1,15 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:portfolio/pages/intro_page.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+import 'utils/color_utility.dart';
+
+void main() => runApp(DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => const MyApp(),
+    ));
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,15 +17,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(360, 690),
+        designSize: const Size(510, 750),
         minTextAdapt: true,
-        splitScreenMode: true,
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Esraa Khalifa Portfolio',
+          title: 'Esraa Khalifa - Portfolio',
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
+            fontFamily: "PlusJakartaSans",
+            primaryColor: ColorUtility.main,
+            appBarTheme: const AppBarTheme(
+                backgroundColor: ColorUtility.background,
+                foregroundColor: ColorUtility.main),
+            colorScheme: ColorScheme.fromSwatch(
+                backgroundColor: ColorUtility.background),
           ),
           home: const IntroPage(),
         ));
